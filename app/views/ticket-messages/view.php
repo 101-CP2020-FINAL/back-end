@@ -4,10 +4,10 @@ use yii\bootstrap\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Role */
+/* @var $model app\models\Staff */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Задачи', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Сообщения', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -33,28 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'title',
-            'type.title',
-            'priority.title',
-            'parent.title',
-            'author.fio',
-            'employersStr',
-            'date_start:datetime',
-            'deadline:datetime',
+            'employer.fio',
+            'messageType.title',
+            'ticket.title',
             'date_created:datetime',
-            'description:ntext',
-            [
-                'header' => 'Файлы',
-                'attribute' => 'files',
-                'value' => function($model){
-                    $result = '';
-                    foreach ($model->tblTicketFiles as $file) {
-                        $result .= Html::a($file->path, $file->path, ['target' => '_blank']).'<br>';
-                    }
-                    return $result;
-                },
-                'format' => 'raw'
-            ]
+            'message'
         ],
     ]) ?>
         </div>

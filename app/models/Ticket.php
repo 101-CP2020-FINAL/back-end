@@ -5,6 +5,7 @@ namespace app\models;
 use app\tables\TblTicket;
 use app\tables\TblTicketEmployees;
 use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 class Ticket extends TblTicket
 {
@@ -42,7 +43,8 @@ class Ticket extends TblTicket
     public function rules()
     {
         return ArrayHelper::merge(parent::rules(), [
-            [['employers', 'files'], 'safe']
+            [['employers', 'files'], 'safe'],
+            ['files', 'file',  'maxFiles' => 10]
         ]);
     }
 
@@ -70,7 +72,12 @@ class Ticket extends TblTicket
                     }
                 }
 
-                //TODO: saving files
+                $files = UploadedFile::getInstances($this, 'files');
+                if (is_array($files)) {
+                    foreach ($files as $file) {
+                        TicketFile::saveFile($this->id, $file);
+                    }
+                }
                 return true;
             }
         }

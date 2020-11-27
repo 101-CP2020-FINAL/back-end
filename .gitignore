@@ -7,3 +7,4 @@ app/config/db.php
 app/web/index.php
 app/web/robots.txt
 app/yii
+postgres-data

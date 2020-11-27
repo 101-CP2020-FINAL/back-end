@@ -33,7 +33,8 @@ return [
         'path' => 'dev',
         'setWritable' => [
             'runtime',
-            'web/assets'
+            'web/assets',
+            'web/uploads'
         ],
         'setExecutable' => [
             'yii',
@@ -46,7 +47,8 @@ return [
         'path' => 'prod',
         'setWritable' => [
             'runtime',
-            'web/assets'
+            'web/assets',
+            'web/uploads'
         ],
         'setExecutable' => [
             'yii',
