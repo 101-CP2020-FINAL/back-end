@@ -1,0 +1,67 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:13.1-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - ../postgres-data:/var/lib/postgresql/data
+    networks:
+      - cp2020-final-backend
+    container_name: cp2020-final-backend-db
+  nginx:
+    build:
+      context: ./..
+      dockerfile: docker/nginx/Dockerfile
+    restart: always
+    ports:
+      - "${APP_PORT}:8080"
+    volumes:
+      - "${VOLUME}:/app"
+    depends_on:
+      - php
+    networks:
+      - cp2020-final-backend
+    container_name: cp2020-final-backend-nginx
+
+  php:
+    build:
+      context: ./..
+      dockerfile: "docker/php/Dockerfile-${ENV}"
+      args:
+        ENV: $ENV
+        DB_HOST: $DB_HOST
+        DB_NAME: $DB_NAME
+        DB_USER: $DB_USER
+        DB_PASSWORD: $DB_PASSWORD
+    restart: always
+    volumes:
+      - "${VOLUME}:/app"
+    depends_on:
+      - db
+    networks:
+      - cp2020-final-backend
+    container_name: cp2020-final-backend-php
+
+  centrifugo:
+    image: centrifugo/centrifugo
+    volumes:
+      - ../app/centrifugo:/centrifugo
+    ports:
+      - 8081:8000
+    entrypoint: centrifugo --config=config.json --admin
+    networks:
+      - cp2020-final-backend
+    container_name: cp2020-final-backend-centrifugo
+
+volumes:
+  data-volume:
+  postgres-data-volume:
+networks:
+  cp2020-final-backend:

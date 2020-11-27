@@ -1,0 +1,9 @@
+.idea
+.env
+
+app/vendor
+app/config/*-local.php
+app/config/db.php
+app/web/index.php
+app/web/robots.txt
+app/yii
