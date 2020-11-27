@@ -110,7 +110,7 @@ class m201127_204625_tickets extends Migration
             'id' => $this->primaryKey(),
             'ticket_id' => $this->integer()->notNull(),
             'employer_id' => $this->integer(),
-            'message_type_id' => $this->integer()->notNull(),
+            'message_type_id' => $this->integer(),
             'message' => $this->text()->notNull(),
             'date_created' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP')
         ]);

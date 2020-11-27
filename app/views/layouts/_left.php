@@ -10,6 +10,9 @@
                 ['label' => 'Группы', 'icon' => 'users', 'url' => ['/groups'], 'active' => $this->context->id == 'groups',],
                 ['label' => 'Сотрудники', 'icon' => 'user', 'url' => ['/employers'], 'active' => $this->context->id == 'employers',],
                 ['label' => 'Штат сотрудников', 'icon' => 'users', 'url' => ['/staff'], 'active' => $this->context->id == 'staff',],
+                ['label' => 'Типы задач', 'icon' => 'list', 'url' => ['/ticket-types'], 'active' => $this->context->id == 'ticket-types',],
+                ['label' => 'Приоритет задач', 'icon' => 'tags', 'url' => ['/ticket-priorities'], 'active' => $this->context->id == 'ticket-priorities',],
+                ['label' => 'Типы сообщений', 'icon' => 'envelope', 'url' => ['/message-types'], 'active' => $this->context->id == 'message-types',],
             ],
         ]) ?>
     </section>

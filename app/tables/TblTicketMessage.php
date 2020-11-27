@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property int $ticket_id
  * @property int|null $employer_id
- * @property int $message_type_id
+ * @property int|null $message_type_id
  * @property string $message
  * @property string|null $date_created
  *
@@ -34,7 +34,7 @@ class TblTicketMessage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ticket_id', 'message_type_id', 'message'], 'required'],
+            [['ticket_id', 'message'], 'required'],
             [['ticket_id', 'employer_id', 'message_type_id'], 'default', 'value' => null],
             [['ticket_id', 'employer_id', 'message_type_id'], 'integer'],
             [['message'], 'string'],
