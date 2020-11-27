@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'last_name',
             'user.username:text:Логин',
             'date_created:date',
+            'external_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -37,7 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'last_name',
             'date_created:datetime',
             'user.username:text:Логин',
-            'employerGroups'
+            'employerGroups',
+            'external_id'
         ],
     ]) ?>
         </div>

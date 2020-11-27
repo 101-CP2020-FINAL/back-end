@@ -26,6 +26,8 @@ use yii\widgets\ActiveForm;
         'prompt' => ''
     ])?>
 
+    <?= $form->field($model, 'external_id');?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>

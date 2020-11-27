@@ -23,7 +23,8 @@ class Employer extends TblEmployer
             'date_created' => 'Дата создания',
             'username' => 'Логин',
             'password' => 'Пароль',
-            'groups' => 'Группы'
+            'groups' => 'Группы',
+            'external_id' => 'Табельный номер сотрудника'
         ];
     }
 

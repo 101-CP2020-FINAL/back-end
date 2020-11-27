@@ -11,6 +11,7 @@ use Yii;
  * @property int $user_id
  * @property string $first_name
  * @property string $last_name
+ * @property int|null $external_id
  * @property int|null $date_created
  *
  * @property TblUser $user
@@ -34,8 +35,8 @@ class TblEmployer extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'first_name', 'last_name'], 'required'],
-            [['user_id', 'date_created'], 'default', 'value' => null],
-            [['user_id', 'date_created'], 'integer'],
+            [['user_id', 'external_id', 'date_created'], 'default', 'value' => null],
+            [['user_id', 'external_id', 'date_created'], 'integer'],
             [['first_name', 'last_name'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblUser::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -51,6 +52,7 @@ class TblEmployer extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
+            'external_id' => 'External ID',
             'date_created' => 'Date Created',
         ];
     }

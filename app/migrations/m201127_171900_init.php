@@ -42,6 +42,49 @@ class m201127_171900_init extends Migration
             'parent_id' => $this->integer()
         ]);
 
+        $this->batchInsert('tbl_department', ['id', 'title', 'parent_id'], [
+            [
+                'id' => 1,
+                'title' => 'Цех 1',
+                'parent_id' => null
+            ],
+            [
+                'id' => 2,
+                'title' => 'Участок 1',
+                'parent_id' => 1
+            ],
+            [
+                'id' => 3,
+                'title' => 'Участок 2',
+                'parent_id' => 1
+            ],
+            [
+                'id' => 4,
+                'title' => 'Корпус 1',
+                'parent_id' => 2
+            ],
+            [
+                'id' => 5,
+                'title' => 'Корпус 2',
+                'parent_id' => 2
+            ],
+            [
+                'id' => 6,
+                'title' => 'Корпус 1',
+                'parent_id' => 3
+            ],
+            [
+                'id' => 7,
+                'title' => 'Зона обслуживания 1',
+                'parent_id' => 6
+            ],
+            [
+                'id' => 8,
+                'title' => 'Зона обслуживания 2',
+                'parent_id' => 6
+            ],
+        ]);
+
         $this->addForeignKey('fk_department_parent', 'tbl_department', 'parent_id', 'tbl_department', 'id', 'CASCADE');
 
         $this->createTable('tbl_role', [
@@ -49,9 +92,22 @@ class m201127_171900_init extends Migration
             'title' => $this->string()->notNull()
         ]);
 
+        $this->batchInsert('tbl_role', ['title'], [
+            ['title' => 'исполнитель'],
+            ['title' => 'мастер'],
+            ['title' => 'начальник участка'],
+            ['title' => 'начальник цеха']
+        ]);
+
         $this->createTable('tbl_group', [
             'id' => $this->primaryKey(),
             'title' => $this->string()->notNull()
+        ]);
+
+        $this->batchInsert('tbl_group', ['title'], [
+            ['title' => 'Мастера'],
+            ['title' => 'Начальники участков'],
+            ['title' => 'Инженеры по ТБ']
         ]);
 
         $this->createTable('tbl_employer', [
@@ -59,6 +115,7 @@ class m201127_171900_init extends Migration
             'user_id' => $this->integer()->notNull(),
             'first_name' => $this->string()->notNull(),
             'last_name' => $this->string()->notNull(),
+            'external_id' => $this->integer(),
             'date_created' => $this->integer()
         ]);
 
