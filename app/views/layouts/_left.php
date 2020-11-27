@@ -13,6 +13,8 @@
                 ['label' => 'Типы задач', 'icon' => 'list', 'url' => ['/ticket-types'], 'active' => $this->context->id == 'ticket-types',],
                 ['label' => 'Приоритет задач', 'icon' => 'tags', 'url' => ['/ticket-priorities'], 'active' => $this->context->id == 'ticket-priorities',],
                 ['label' => 'Типы сообщений', 'icon' => 'envelope', 'url' => ['/message-types'], 'active' => $this->context->id == 'message-types',],
+                ['label' => 'Задачи', 'icon' => 'sticky-note', 'url' => ['/tickets'], 'active' => $this->context->id == 'tickets',],
+                ['label' => 'Сообщения', 'icon' => 'comments', 'url' => ['/ticket-messages'], 'active' => $this->context->id == 'ticket-messages',],
             ],
         ]) ?>
     </section>

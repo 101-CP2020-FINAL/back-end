@@ -54,7 +54,7 @@ services:
     volumes:
       - ../app/centrifugo:/centrifugo
     ports:
-      - 8081:8000
+      - "${CENTRIFUGO_PORT}:8000"
     entrypoint: centrifugo --config=config.json --admin
     networks:
       - cp2020-final-backend
