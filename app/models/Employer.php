@@ -12,6 +12,7 @@ class Employer extends TblEmployer
     public $username;
     public $password;
     public $groups;
+    public $title;
 
     public function attributeLabels()
     {
@@ -82,8 +83,13 @@ class Employer extends TblEmployer
 
     public function afterFind()
     {
-        $this->username = $this->user->username;
+        $this->username = $this->user ? $this->user->username : '';
         $this->groups = ArrayHelper::getColumn($this->tblEmployerGroups, 'group_id');
         parent::afterFind();
+    }
+
+    public function getFio()
+    {
+        return $this->first_name.' '.$this->last_name;
     }
 }

@@ -24,6 +24,7 @@ sh run-dev.sh
 
 3. Пути для просмотра
 ```
-http://localhost:${APP_PORT} - web
-http://localhost:${APP_PORT}/api/public/v1 - api
+http://localhost:${APP_PORT}/admin - web
+http://localhost:${APP_PORT}/api/manager/v1 - api
+http://localhost:${APP_PORT}/api/mobile/v1 - api
 ```
