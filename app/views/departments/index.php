@@ -6,10 +6,10 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Сервисы';
+$this->title = 'Отделы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="internal-service-index">
+<div class="department-index">
 
     <div class="box box-default">
         <div class="box-header">
@@ -20,22 +20,23 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="box-body">
-            <?php Pjax::begin(); ?>
 
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
+    <?php Pjax::begin(); ?>
 
-                    'name',
-                    'access_token',
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-                    ['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?>
+            'title',
+            'parent.title:text:Родитель',
 
-            <?php Pjax::end(); ?>
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
         </div>
     </div>
+
+    <?php Pjax::end(); ?>
 
 </div>

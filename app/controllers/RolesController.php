@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\InternalService;
+use app\models\Role;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * InternalServicesController implements the CRUD actions for InternalService model.
+ * RolesController implements the CRUD actions for Role model.
  */
-class InternalServicesController extends Controller
+class RolesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,13 +30,13 @@ class InternalServicesController extends Controller
     }
 
     /**
-     * Lists all InternalService models.
+     * Lists all Role models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => InternalService::find(),
+            'query' => Role::find(),
         ]);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class InternalServicesController extends Controller
     }
 
     /**
-     * Displays a single InternalService model.
+     * Displays a single Role model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class InternalServicesController extends Controller
     }
 
     /**
-     * Creates a new InternalService model.
+     * Creates a new Role model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new InternalService();
+        $model = new Role();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class InternalServicesController extends Controller
     }
 
     /**
-     * Updates an existing InternalService model.
+     * Updates an existing Role model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class InternalServicesController extends Controller
     }
 
     /**
-     * Deletes an existing InternalService model.
+     * Deletes an existing Role model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class InternalServicesController extends Controller
     }
 
     /**
-     * Finds the InternalService model based on its primary key value.
+     * Finds the Role model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return InternalService the loaded model
+     * @return Role the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = InternalService::findOne($id)) !== null) {
+        if (($model = Role::findOne($id)) !== null) {
             return $model;
         }
 
