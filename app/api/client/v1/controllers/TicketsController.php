@@ -25,17 +25,34 @@ class TicketsController extends DefaultController
         return $model;
     }
 
-    public function actionTemplate($type)
+    public function actionTemplate($type = null, $text = null)
     {
-        $type = ApiTicketType::findOne($type);
-        if (!$type) {
-            throw new BadRequestHttpException('Неверный тип');
+        if (!$type && !$text) {
+            throw new BadRequestHttpException('Задайте тип или текст');
+        }
+        if ($type) {
+            $type = ApiTicketType::findOne($type);
+            if (!$type) {
+                throw new BadRequestHttpException('Неверный тип');
+            }
+
+            if ($type->template) {
+                return ApiTicketType::getTemplate($type);
+            }
         }
 
-        if ($type->template) {
-            return ApiTicketType::getTemplate($type);
+        if ($text) {
+            $types = ApiTicketType::find()->all();
+            $text = mb_strtolower($text);
+            foreach ($types as $ticketType) {
+                if (stripos($text, mb_strtolower($ticketType->title)) !== false) {
+                    if ($ticketType->template) {
+                        return ApiTicketType::getTemplate($ticketType, ApiTicketType::getValuesFromText($ticketType->template, $text));
+                    }
+                    return [];
+                }
+            }
         }
-
         return [];
     }
 

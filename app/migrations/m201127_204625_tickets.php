@@ -25,6 +25,11 @@ class m201127_204625_tickets extends Migration
                 'description' => 'Необходимо провести инструктаж по {{briefing_target}} на участке {{briefing_department}} для сотрудников {{employees}}',
                 'date_start' => '{{date_start}}',
                 'deadline' => '{{deadline}}',
+                'labels' => [
+                    'briefing_target' => 'тема',
+                    'briefing_department' => 'отдел',
+                    'employees' => 'сотрудники'
+                ]
             ], JSON_UNESCAPED_UNICODE)],
             ['title' => 'Соблюдать требования безопасности', 'template' => null],
             ['title' => 'Ожидание комиссии', 'template' => null],

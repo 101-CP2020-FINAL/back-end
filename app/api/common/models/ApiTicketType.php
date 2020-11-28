@@ -14,7 +14,7 @@ class ApiTicketType extends TblTicketType
         $replacement = [];
         foreach ($attributes as $attribute) {
             $pattern[] = '/{{'.$attribute.'}}/';
-            $replacement[] = empty($values) ? '______________' : $values[$attribute];
+            $replacement[] = empty($values) || !isset($values[$attribute]) || !$values[$attribute] ? '______________' : $values[$attribute];
         }
         $template = $type->template;
         foreach ($template as $key => $value) {
@@ -50,5 +50,33 @@ class ApiTicketType extends TblTicketType
             }
         }
         return $vars;
+    }
+
+    public static function getValuesFromText($template, $text)
+    {
+        $values = [];
+        if (isset($template['labels'])) {
+            $arr = explode(' ', $text);
+            $labels = array_values($template['labels']);
+            foreach ($template['labels'] as $attr => $label) {
+                $n = 0;
+                while ($n < count($arr)) {
+                    if ($arr[$n] === $label) {
+                        $m = $n + 1;
+                        $values[$attr] = [];
+                        for ($j = $m; $j < count($arr); $j++) {
+                            if (in_array($attr[$j], $labels)) {
+                                break;
+                            }
+                            $values[$attr][] = $arr[$j];
+                        }
+                    }
+                    $n++;
+                }
+            }
+        }
+        return array_map(function($item){
+            return implode(" ", $item);
+        }, $values);
     }
 }
