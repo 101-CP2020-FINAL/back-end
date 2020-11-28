@@ -57,8 +57,8 @@ class TicketsController extends DefaultController
 
     public function actionStatus()
 	{
-		$ticket_id = \Yii::$app->request->getBodyParam('ticket_id');
-		$status = \Yii::$app->request->getBodyParam('status');
+		$ticket_id = (int) \Yii::$app->request->getBodyParam('ticket_id');
+		$status = (int) \Yii::$app->request->getBodyParam('status');
 
 		$model = ApiTicket::findOne($ticket_id);
 		if (!$model)
@@ -66,7 +66,7 @@ class TicketsController extends DefaultController
 			throw new NotFoundHttpException();
 		}
 
-		$model->setAttribute('status', $status);
+		$model->setAttribute('status_id', $status);
 		if (!$model->save())
 		{
 			throw new ServerErrorHttpException();
