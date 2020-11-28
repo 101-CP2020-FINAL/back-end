@@ -60,12 +60,12 @@ class ApiTicketType extends TblTicketType
             $labels = array_values($template['labels']);
             foreach ($template['labels'] as $attr => $label) {
                 $n = 0;
-                while ($n < count($arr)) {
+                while ($n < count($arr) - 1) {
                     if ($arr[$n] === $label) {
                         $m = $n + 1;
                         $values[$attr] = [];
                         for ($j = $m; $j < count($arr); $j++) {
-                            if (in_array($attr[$j], $labels)) {
+                            if (in_array($arr[$j], $labels)) {
                                 break;
                             }
                             $values[$attr][] = $arr[$j];
