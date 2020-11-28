@@ -1,0 +1,20 @@
+{
+  "v3_use_offset": true,
+  "client_insecure": true,
+  "admin_password": "0f7049be-9df3-4243-83a8-a30822ebd253",
+  "admin_secret": "50c8598c-8b57-4e8a-bfa3-fb8a9e950806",
+  "api_key": "bbd1bcad-ea12-40f7-8902-75d6aab484db",
+  "publish": true,
+  "namespaces": [
+    {
+      "name": "public",
+      "publish": true,
+      "watch": true,
+      "presence": true,
+      "join_leave": true,
+      "recover": true,
+      "history_size": 10,
+      "history_lifetime": 30
+    }
+  ]
+}
