@@ -27,12 +27,7 @@ class ApiTicket extends TblTicket
                     'title' => $this->type->title
                 ] : null;
             },
-            'priority' => function(){
-                return $this->priority ? [
-                    'id' => $this->priority->id,
-                    'title' => $this->priority->title
-                ] : null;
-            },
+            'priority',
             'status',
             'title',
             'description',
