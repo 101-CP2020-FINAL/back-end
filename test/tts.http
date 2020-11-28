@@ -1,0 +1,7 @@
+POST http://127.0.0.1/api/client/v1/tts
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="audio"; filename="decoder-test.wav"
+
+< ./decoder-test.wav

@@ -60,8 +60,18 @@ services:
       - cp2020-final-backend
     container_name: cp2020-final-backend-centrifugo
 
+  alphacep:
+    build:
+      context: ./alphacep
+    volumes:
+      - ./alphacep/model:/opt/vosk-model-ru/model
+    networks:
+      - cp2020-final-backend
+    container_name: cp2020-final-backend-alphacep
+
 volumes:
   data-volume:
   postgres-data-volume:
+  alphacep-volume:
 networks:
   cp2020-final-backend:
