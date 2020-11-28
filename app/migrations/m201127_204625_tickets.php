@@ -22,13 +22,12 @@ class m201127_204625_tickets extends Migration
             ['title' => 'Провести инструктаж на участке', 'template' => json_encode([
                 'title' => 'Проведение инструктажа по {{briefing_target}} на участке {{briefing_department}}',
                 'priority_id' => 2,
-                'description' => 'Необходимо провести инструктаж по {{briefing_target}} на участке {{briefing_department}} для сотрудников {{employees}}',
+                'description' => 'Необходимо провести инструктаж по теме {{briefing_target}} на участке {{briefing_department}}',
                 'date_start' => '{{date_start}}',
                 'deadline' => '{{deadline}}',
                 'labels' => [
                     'briefing_target' => 'тема',
-                    'briefing_department' => 'отдел',
-                    'employees' => 'сотрудники'
+                    'briefing_department' => 'отдел'
                 ]
             ], JSON_UNESCAPED_UNICODE)],
             ['title' => 'Соблюдать требования безопасности', 'template' => null],

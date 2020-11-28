@@ -20,6 +20,8 @@ class ApiTicketType extends TblTicketType
         foreach ($template as $key => $value) {
             $template[$key] = preg_replace($pattern, $replacement, $value);
         }
+        $template['type_id'] = $type->id;
+        $template['deadline'] = \Yii::$app->formatter->asDatetime(time()+24*2600, 'php:Y-m-d H:i:s');
         return $template;
     }
     /**
