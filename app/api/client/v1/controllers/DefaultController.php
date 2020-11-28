@@ -13,19 +13,19 @@ class DefaultController extends Controller
     {
         $behaviors = parent::behaviors();
 
-        $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::class,
-        ];
-
-        $behaviors['access'] = [
-            'class' => AccessControl::class,
-            'rules' => [
-                [
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-            ],
-        ];
+//        $behaviors['authenticator'] = [
+//            'class' => HttpBearerAuth::class,
+//        ];
+//
+//        $behaviors['access'] = [
+//            'class' => AccessControl::class,
+//            'rules' => [
+//                [
+//                    'allow' => true,
+//                    'roles' => ['@'],
+//                ],
+//            ],
+//        ];
 
         return $behaviors;
     }

@@ -29,6 +29,8 @@ class Ticket extends TblTicket
             'date_start' => 'Дата начала',
             'parent_id' => 'Родитель',
             'parent.title' => 'Родитель',
+            'status_id' => 'Статус',
+            'status.title' => 'Статус',
             'employers' => 'Исполнители',
             'employersStr' => 'Исполнители',
             'files' => 'Файлы'

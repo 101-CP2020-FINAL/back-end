@@ -22,6 +22,12 @@ use yii\widgets\ActiveForm;
         'prompt' => ''
     ])  ?>
 
+
+    <?= $form->field($model, 'status_id')->dropDownList(\app\models\TicketStatus::getList(), [
+        'class' => 'form-control select2',
+        'prompt' => ''
+    ])  ?>
+
     <?= $form->field($model, 'author_id')->dropDownList(\app\models\Employer::getList(), [
         'class' => 'form-control select2',
         'prompt' => ''

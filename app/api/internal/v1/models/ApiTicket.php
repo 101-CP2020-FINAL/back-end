@@ -2,6 +2,7 @@
 
 namespace app\api\internal\v1\models;
 
+use app\api\common\models\ApiTicketType;
 use yii\helpers\ArrayHelper;
 
 class ApiTicket extends \app\api\common\models\ApiTicket
@@ -30,17 +31,7 @@ class ApiTicket extends \app\api\common\models\ApiTicket
 
     public function saveByTemplate()
     {
-        $attributes = ApiTicketType::getAttributesById($this->type_id);
-        $pattern = [];
-        $replacement = [];
-        foreach ($attributes as $attribute) {
-            $pattern[] = '/{{'.$attribute.'}}/';
-            $replacement[] = \Yii::$app->request->post($attribute);
-        }
-        $template = $this->type->template;
-        foreach ($template as $key => $value) {
-            $template[$key] = preg_replace($pattern, $replacement, $value);
-        }
+        $template = ApiTicketType::getTemplate($this->type, \Yii::$app->request->post());
 
         return $this->load($template, '') && $this->save();
     }

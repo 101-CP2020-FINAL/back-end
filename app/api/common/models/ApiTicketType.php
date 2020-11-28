@@ -1,12 +1,27 @@
 <?php
 
-namespace app\api\internal\v1\models;
+namespace app\api\common\models;
 
 use app\tables\TblTicketType;
 use yii\helpers\ArrayHelper;
 
 class ApiTicketType extends TblTicketType
 {
+    public static function getTemplate($type, $values = [])
+    {
+        $attributes = ApiTicketType::getAttributesById($type->id);
+        $pattern = [];
+        $replacement = [];
+        foreach ($attributes as $attribute) {
+            $pattern[] = '/{{'.$attribute.'}}/';
+            $replacement[] = empty($values) ? '______________' : $values[$attribute];
+        }
+        $template = $type->template;
+        foreach ($template as $key => $value) {
+            $template[$key] = preg_replace($pattern, $replacement, $value);
+        }
+        return $template;
+    }
     /**
      * @param $id
      * @return array

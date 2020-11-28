@@ -76,10 +76,24 @@ class m201127_204625_tickets extends Migration
             ['title' => 'задача делегирована'],
         ]);
 
+        $this->createTable('tbl_ticket_status', [
+            'id' => $this->primaryKey(),
+            'alias' => $this->string()->notNull(),
+            'title' => $this->string()->notNull()
+        ]);
+
+        $this->batchInsert('tbl_ticket_status', ['alias', 'title'], [
+            ['alias' => 'todo', 'title' => 'К выполнению'],
+            ['alias' => 'inprogress', 'title' => 'В работе'],
+            ['alias' => 'toread', 'title' => 'На проверку'],
+            ['alias' => 'done', 'title' => 'Выполнена'],
+        ]);
+
         $this->createTable('tbl_ticket', [
             'id' => $this->primaryKey(),
             'type_id' => $this->integer()->notNull(),
             'priority_id' => $this->integer()->notNull(),
+            'status_id' => $this->integer()->notNull(),
             'title' => $this->string()->notNull(),
             'description' => $this->text(),
             'date_created' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
@@ -91,6 +105,7 @@ class m201127_204625_tickets extends Migration
 
         $this->addForeignKey('fk_ticket_type', 'tbl_ticket', 'type_id', 'tbl_ticket_type', 'id');
         $this->addForeignKey('fk_ticket_priority', 'tbl_ticket', 'priority_id', 'tbl_ticket_priority', 'id');
+        $this->addForeignKey('fk_ticket_status', 'tbl_ticket', 'status_id', 'tbl_ticket_status', 'id');
         $this->addForeignKey('fk_ticket_parent', 'tbl_ticket', 'parent_id', 'tbl_ticket', 'id', 'SET NULL');
 
         $this->createTable('tbl_ticket_employees', [
@@ -149,10 +164,12 @@ class m201127_204625_tickets extends Migration
         $this->dropForeignKey('fk_ticket_type', 'tbl_ticket');
         $this->dropForeignKey('fk_ticket_priority', 'tbl_ticket');
         $this->dropForeignKey('fk_ticket_parent', 'tbl_ticket');
+        $this->dropForeignKey('fk_ticket_status', 'tbl_ticket');
 
         $this->dropTable('tbl_ticket');
 
         $this->dropTable('tbl_ticket_type');
+        $this->dropTable('tbl_ticket_status');
         $this->dropTable('tbl_ticket_priority');
         $this->dropTable('tbl_message_type');
 

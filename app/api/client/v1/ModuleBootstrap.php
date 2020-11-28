@@ -18,6 +18,9 @@ class ModuleBootstrap implements BootstrapInterface
 
         $app->getUrlManager()->addRules([
             'GET ' . $pathPrefix  => 'api-client-v1/default/index',
+            'GET ' . $pathPrefix . '/tickets/template'  => 'api-client-v1/tickets/template',
+            'GET ' . $pathPrefix . '/tickets/dictionaries'  => 'api-client-v1/tickets/dictionaries',
+            'GET ' . $pathPrefix . '/tickets'  => 'api-client-v1/tickets/index',
             'POST ' . $pathPrefix . '/tickets'  => 'api-client-v1/tickets/create',
             'POST ' . $pathPrefix . '/tts'  => 'api-client-v1/tts/index',
         ], true);

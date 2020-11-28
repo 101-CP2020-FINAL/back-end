@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property int $type_id
  * @property int $priority_id
+ * @property int $status_id
  * @property string $title
  * @property string|null $description
  * @property string|null $date_created
@@ -21,6 +22,7 @@ use Yii;
  * @property TblTicket $parent
  * @property TblTicket[] $tblTickets
  * @property TblTicketPriority $priority
+ * @property TblTicketStatus $status
  * @property TblTicketType $type
  * @property TblTicketEmployees[] $tblTicketEmployees
  * @property TblEmployer[] $employers
@@ -43,14 +45,15 @@ class TblTicket extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'priority_id', 'title'], 'required'],
-            [['type_id', 'priority_id', 'author_id', 'parent_id'], 'default', 'value' => null],
-            [['type_id', 'priority_id', 'author_id', 'parent_id'], 'integer'],
+            [['type_id', 'priority_id', 'status_id', 'title'], 'required'],
+            [['type_id', 'priority_id', 'status_id', 'author_id', 'parent_id'], 'default', 'value' => null],
+            [['type_id', 'priority_id', 'status_id', 'author_id', 'parent_id'], 'integer'],
             [['description'], 'string'],
             [['date_created', 'deadline', 'date_start'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblTicket::className(), 'targetAttribute' => ['parent_id' => 'id']],
             [['priority_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblTicketPriority::className(), 'targetAttribute' => ['priority_id' => 'id']],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblTicketStatus::className(), 'targetAttribute' => ['status_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblTicketType::className(), 'targetAttribute' => ['type_id' => 'id']],
         ];
     }
@@ -64,6 +67,7 @@ class TblTicket extends \yii\db\ActiveRecord
             'id' => 'ID',
             'type_id' => 'Type ID',
             'priority_id' => 'Priority ID',
+            'status_id' => 'Status ID',
             'title' => 'Title',
             'description' => 'Description',
             'date_created' => 'Date Created',
@@ -102,6 +106,16 @@ class TblTicket extends \yii\db\ActiveRecord
     public function getPriority()
     {
         return $this->hasOne(TblTicketPriority::className(), ['id' => 'priority_id']);
+    }
+
+    /**
+     * Gets query for [[Status]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus()
+    {
+        return $this->hasOne(TblTicketStatus::className(), ['id' => 'status_id']);
     }
 
     /**
