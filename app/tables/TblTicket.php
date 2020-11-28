@@ -18,7 +18,6 @@ use Yii;
  * @property string|null $date_start
  * @property int|null $parent_id
  *
- * @property TblEmployer $author
  * @property TblTicket $parent
  * @property TblTicket[] $tblTickets
  * @property TblTicketPriority $priority
@@ -50,7 +49,6 @@ class TblTicket extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['date_created', 'deadline', 'date_start'], 'safe'],
             [['title'], 'string', 'max' => 255],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblEmployer::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblTicket::className(), 'targetAttribute' => ['parent_id' => 'id']],
             [['priority_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblTicketPriority::className(), 'targetAttribute' => ['priority_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblTicketType::className(), 'targetAttribute' => ['type_id' => 'id']],
@@ -74,16 +72,6 @@ class TblTicket extends \yii\db\ActiveRecord
             'date_start' => 'Date Start',
             'parent_id' => 'Parent ID',
         ];
-    }
-
-    /**
-     * Gets query for [[Author]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAuthor()
-    {
-        return $this->hasOne(TblEmployer::className(), ['id' => 'author_id']);
     }
 
     /**

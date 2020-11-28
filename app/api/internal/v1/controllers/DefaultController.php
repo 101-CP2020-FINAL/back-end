@@ -1,6 +1,6 @@
 <?php
 
-namespace app\api\manager\v1\controllers;
+namespace app\api\internal\v1\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
@@ -32,6 +32,6 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        return "Manager API works!";
+        return "Internal API works!";
     }
 }

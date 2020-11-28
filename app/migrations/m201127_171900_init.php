@@ -19,12 +19,7 @@ class m201127_171900_init extends Migration
         ]);
 
         $this->insert('tbl_internal_services', [
-            'name' => 'mobile',
-            'access_token' => Yii::$app->security->generateRandomString(100),
-        ]);
-
-        $this->insert('tbl_internal_services', [
-            'name' => 'manager',
+            'name' => 'internal',
             'access_token' => Yii::$app->security->generateRandomString(100),
         ]);
 

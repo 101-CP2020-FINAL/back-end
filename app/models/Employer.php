@@ -59,7 +59,8 @@ class Employer extends TblEmployer
             $user->setAttributes([
                 'username' => $this->username,
                 'password_hash' => $this->password ? \Yii::$app->security->generatePasswordHash($this->password) : $user->password_hash,
-                'date_created' => $user->date_created ? $user->date_created : time()
+                'date_created' => $user->date_created ? $user->date_created : time(),
+                'access_token' => $user->isNewRecord ? \Yii::$app->security->generateRandomString(100) : $user->access_token
             ]);
 
             if ($user->save()) {

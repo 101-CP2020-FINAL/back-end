@@ -1,6 +1,6 @@
 <?php
 
-namespace app\api\mobile\v1\controllers;
+namespace app\api\client\v1\controllers;
 
 use Yii;
 use yii\filters\AccessControl;

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\api\manager\v1\models;
+namespace app\api\internal\v1\models;
 
 use app\tables\TblInternalServices;
 use yii\web\IdentityInterface;
@@ -26,7 +26,7 @@ class ApiInternalService extends TblInternalServices implements IdentityInterfac
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token, 'name' => 'manager']);
+        return static::findOne(['access_token' => $token]);
     }
 
     /**

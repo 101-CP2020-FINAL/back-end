@@ -24,7 +24,7 @@ class Ticket extends TblTicket
             'description' => 'Описание',
             'date_created' => 'Дата создания',
             'author_id' => 'Создатель',
-            'author.fio' => 'Создатель',
+            'author' => 'Создатель',
             'deadline' => 'Срок окончания',
             'date_start' => 'Дата начала',
             'parent_id' => 'Родитель',
@@ -98,6 +98,15 @@ class Ticket extends TblTicket
 
     public function getAuthor()
     {
-        return $this->hasOne(Employer::className(), ['id' => 'author_id']);
+        $author = Employer::findOne($this->author_id);
+        if (!$author) {
+            $author = InternalService::findOne($this->author_id);
+            if ($author) {
+                return $author->name;
+            }
+        } else {
+            return $author->fio;
+        }
+        return null;
     }
 }

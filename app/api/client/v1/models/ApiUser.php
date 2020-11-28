@@ -1,11 +1,11 @@
 <?php
 
-namespace app\api\mobile\v1\models;
+namespace app\api\client\v1\models;
 
-use app\tables\TblInternalServices;
+use app\tables\TblUser;
 use yii\web\IdentityInterface;
 
-class ApiInternalService extends TblInternalServices implements IdentityInterface
+class ApiUser extends TblUser implements IdentityInterface
 {
     /**
      * Finds an identity by the given ID.
@@ -26,7 +26,7 @@ class ApiInternalService extends TblInternalServices implements IdentityInterfac
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token, 'name' => 'mobile']);
+        return static::findOne(['access_token' => $token]);
     }
 
     /**

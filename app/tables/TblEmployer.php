@@ -17,7 +17,6 @@ use Yii;
  * @property TblUser $user
  * @property TblEmployerGroup[] $tblEmployerGroups
  * @property TblStaff[] $tblStaff
- * @property TblTicket[] $tblTickets
  * @property TblTicketEmployees[] $tblTicketEmployees
  * @property TblTicket[] $tickets
  * @property TblTicketMessage[] $tblTicketMessages
@@ -89,16 +88,6 @@ class TblEmployer extends \yii\db\ActiveRecord
     public function getTblStaff()
     {
         return $this->hasMany(TblStaff::className(), ['employer_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[TblTickets]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTblTickets()
-    {
-        return $this->hasMany(TblTicket::className(), ['author_id' => 'id']);
     }
 
     /**

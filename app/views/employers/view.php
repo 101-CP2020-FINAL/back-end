@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'last_name',
             'date_created:datetime',
             'user.username:text:Логин',
+            'user.access_token:text:Токен',
             'employerGroups',
             'external_id'
         ],

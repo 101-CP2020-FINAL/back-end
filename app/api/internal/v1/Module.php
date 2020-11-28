@@ -1,6 +1,6 @@
 <?php
 
-namespace app\api\manager\v1;
+namespace app\api\internal\v1;
 
 use Yii;
 use yii\web\Response;
@@ -13,7 +13,7 @@ class Module extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\api\manager\v1\controllers';
+    public $controllerNamespace = 'app\api\internal\v1\controllers';
 
     /**
      * @inheritdoc
@@ -24,7 +24,7 @@ class Module extends \yii\base\Module
 
         Yii::$app->set('user', [
             'class' => 'yii\web\User',
-            'identityClass'  => 'app\api\manager\v1\models\ApiInternalService',
+            'identityClass'  => 'app\api\internal\v1\models\ApiInternalService',
             'enableSession' => false
         ]);
 

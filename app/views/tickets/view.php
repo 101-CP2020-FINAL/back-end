@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'type.title',
             'priority.title',
             'parent.title',
-            'author.fio',
+            'author',
             'employersStr',
             'date_start:datetime',
             'deadline:datetime',

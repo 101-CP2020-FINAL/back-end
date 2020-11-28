@@ -15,19 +15,25 @@ class m201127_204625_tickets extends Migration
         $this->createTable('tbl_ticket_type', [
             'id' => $this->primaryKey(),
             'title' => $this->string()->notNull(),
-            'template' => $this->json()
+            'template' => 'jsonb'
         ]);
         
-        $this->batchInsert('tbl_ticket_type', ['title'], [
-            ['title' => 'Провести инструктаж на участке'],
-            ['title' => 'Соблюдать требования безопасности'],
-            ['title' => 'Ожидание комиссии'],
-            ['title' => 'Провести замеры геометрии'],
-            ['title' => 'Провести визуальный осмотр, контроль'],
-            ['title' => 'Следить за работой'],
-            ['title' => 'Провести замену'],
-            ['title' => 'Дополнительный контроль'],
-            ['title' => 'Изменение режима работы установки'],
+        $this->batchInsert('tbl_ticket_type', ['title', 'template'], [
+            ['title' => 'Провести инструктаж на участке', 'template' => json_encode([
+                'title' => 'Проведение инструктажа по {{briefing_target}} на участке {{briefing_department}}',
+                'priority_id' => 2,
+                'description' => 'Необходимо провести инструктаж по {{briefing_target}} на участке {{briefing_department}} для сотрудников {{employees}}',
+                'date_start' => '{{date_start}}',
+                'deadline' => '{{deadline}}',
+            ], JSON_UNESCAPED_UNICODE)],
+            ['title' => 'Соблюдать требования безопасности', 'template' => null],
+            ['title' => 'Ожидание комиссии', 'template' => null],
+            ['title' => 'Провести замеры геометрии', 'template' => null],
+            ['title' => 'Провести визуальный осмотр, контроль', 'template' => null],
+            ['title' => 'Следить за работой', 'template' => null],
+            ['title' => 'Провести замену', 'template' => null],
+            ['title' => 'Дополнительный контроль', 'template' => null],
+            ['title' => 'Изменение режима работы установки', 'template' => null],
         ]);
 
         $this->createTable('tbl_ticket_priority', [
@@ -85,7 +91,6 @@ class m201127_204625_tickets extends Migration
 
         $this->addForeignKey('fk_ticket_type', 'tbl_ticket', 'type_id', 'tbl_ticket_type', 'id');
         $this->addForeignKey('fk_ticket_priority', 'tbl_ticket', 'priority_id', 'tbl_ticket_priority', 'id');
-        $this->addForeignKey('fk_ticket_author', 'tbl_ticket', 'author_id', 'tbl_employer', 'id', 'SET NULL');
         $this->addForeignKey('fk_ticket_parent', 'tbl_ticket', 'parent_id', 'tbl_ticket', 'id', 'SET NULL');
 
         $this->createTable('tbl_ticket_employees', [
@@ -143,7 +148,6 @@ class m201127_204625_tickets extends Migration
 
         $this->dropForeignKey('fk_ticket_type', 'tbl_ticket');
         $this->dropForeignKey('fk_ticket_priority', 'tbl_ticket');
-        $this->dropForeignKey('fk_ticket_author', 'tbl_ticket');
         $this->dropForeignKey('fk_ticket_parent', 'tbl_ticket');
 
         $this->dropTable('tbl_ticket');

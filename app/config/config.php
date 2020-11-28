@@ -20,8 +20,8 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        'app\api\manager\v1\ModuleBootstrap',
-        'app\api\mobile\v1\ModuleBootstrap',
+        'app\api\internal\v1\ModuleBootstrap',
+        'app\api\client\v1\ModuleBootstrap',
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
