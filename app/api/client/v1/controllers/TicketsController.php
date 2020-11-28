@@ -89,6 +89,8 @@ class TicketsController extends DefaultController
 			throw new ServerErrorHttpException();
 		}
 
+		CentrifugoHelper::send(ArrayHelper::toArray($model));
+
 		return $model;
 	}
 }
