@@ -22,6 +22,7 @@ class ModuleBootstrap implements BootstrapInterface
             'GET ' . $pathPrefix . '/tickets/dictionaries'  => 'api-client-v1/tickets/dictionaries',
             'GET ' . $pathPrefix . '/tickets'  => 'api-client-v1/tickets/index',
             'POST ' . $pathPrefix . '/tickets'  => 'api-client-v1/tickets/create',
+            'POST ' . $pathPrefix . '/tickets/status'  => 'api-client-v1/tickets/status',
             'POST ' . $pathPrefix . '/tts'  => 'api-client-v1/tts/index',
         ], true);
     }

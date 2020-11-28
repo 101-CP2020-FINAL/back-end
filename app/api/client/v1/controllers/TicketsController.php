@@ -3,17 +3,20 @@
 namespace app\api\client\v1\controllers;
 
 use app\api\client\v1\models\ApiTicketPriority;
+use app\api\client\v1\models\ApiTicketStatus;
 use app\api\common\models\ApiTicket;
 use app\api\common\models\ApiTicketType;
 use app\components\CentrifugoHelper;
 use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
+use yii\web\ServerErrorHttpException;
 
 class TicketsController extends DefaultController
 {
     public function actionCreate()
     {
-       $model = new ApiTicket();
+    	$model = new ApiTicket();
         $model->load(\Yii::$app->request->post(), '');
 //        $model->setAttribute('author_id', \Yii::$app->user->id);
         if ($model->validate() && $model->save()) {
@@ -51,4 +54,24 @@ class TicketsController extends DefaultController
             'types' => \app\api\client\v1\models\ApiTicketType::find()->all()
         ];
     }
+
+    public function actionStatus()
+	{
+		$ticket_id = \Yii::$app->request->getBodyParam('ticket_id');
+		$status = \Yii::$app->request->getBodyParam('status');
+
+		$model = ApiTicket::findOne($ticket_id);
+		if (!$model)
+		{
+			throw new NotFoundHttpException();
+		}
+
+		$model->setAttribute('status', $status);
+		if (!$model->save())
+		{
+			throw new ServerErrorHttpException();
+		}
+
+		return $model;
+	}
 }
