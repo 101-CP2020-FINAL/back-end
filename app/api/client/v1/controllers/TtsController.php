@@ -23,8 +23,11 @@ class TtsController extends DefaultController
 	public function actionIndex()
 	{
 		$file = UploadedFile::getInstanceByName(self::FILE_FIELD);
+		$filePath = $file->tempName;
 
-		$myfile = fopen($file->tempName, "r");
+		$this->convertFile($filePath);
+
+		$myfile = fopen($filePath, "r");
 
 		$client = new Client(self::ALPHACEP_URL, array('timeout' => self::SENT_TIMEOUT));
 
@@ -38,10 +41,28 @@ class TtsController extends DefaultController
 		$client->close();
 
 		fclose($myfile);
-		unlink($file->tempName);
+		unlink($filePath);
 
 		$res = json_decode($res, true);
 		return $res;
+	}
+
+	private function convertFile(string $filePath): void
+	{
+		// curl -F "file=@input.mp3" 127.0.0.1:3000/wav > output.wav
+		$curlFile = curl_file_create($filePath);
+		$post = array('file'=> $curlFile);
+
+		ob_start();
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "ffmpeg/wav");
+		curl_setopt($ch, CURLOPT_PORT, 3000);
+		curl_setopt($ch, CURLOPT_POST,1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_exec($ch);
+		$converted = ob_get_clean();
+
+		file_put_contents($filePath, $converted);
 	}
 
 }
